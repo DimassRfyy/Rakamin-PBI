@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Go Session Auth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h4 class="text-2xl font-semibold text-center mb-2">SIGN IN</h4>
+        <p class="text-gray-600 text-center mb-4">Masukkan username dan password Anda</p>
+        <hr class="mb-4"/>
+
+        {{ if .error }}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
+                {{ .error }}
+            </div>
+        {{ end }}
+
+        <form action="/login" method="post">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Username</label>
+                <input type="text" name="username" class="w-full px-4 py-2 border {{ if .validation.Username }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="off"/>
+                {{ if .validation.Username }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.Username }}</p>
+                {{ end }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-2 border {{ if .validation.Password }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="off"/>
+                {{ if .validation.Password }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.Password }}</p>
+                {{ end }}
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">SIGN IN</button>
+        </form>
+
+        <hr class="my-4"/>
+        <p class="text-center text-gray-600">Belum punya akun? <a href="/register" class="text-blue-500 hover:underline">Mendaftar</a></p>
+    </div>
+</body>
+</html>

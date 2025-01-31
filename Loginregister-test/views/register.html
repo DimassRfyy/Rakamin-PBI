@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Go Session Auth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h4 class="text-2xl font-semibold text-center mb-2">SIGN UP</h4>
+        <p class="text-gray-600 text-center mb-4">Silahkan isi formulir di bawah untuk mendaftar</p>
+        <hr class="mb-4"/>
+
+        {{ if .pesan }}
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+                {{ .pesan }}
+            </div>
+        {{ end }}
+
+        <form action="/register" method="post">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Nama Lengkap</label>
+                <input type="text" name="nama_lengkap" value="{{ .user.NamaLengkap }}" class="w-full px-4 py-2 border {{ if .validation.NamaLengkap }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                {{ if .validation.NamaLengkap }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.NamaLengkap }}</p>
+                {{ end }}
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">E-Mail</label>
+                <input type="text" name="email" value="{{ .user.Email }}" class="w-full px-4 py-2 border {{ if .validation.Email }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                {{ if .validation.Email }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.Email }}</p>
+                {{ end }}
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Username</label>
+                <input type="text" name="username" value="{{ .user.Username }}" class="w-full px-4 py-2 border {{ if .validation.Username }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                {{ if .validation.Username }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.Username }}</p>
+                {{ end }}
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-2 border {{ if .validation.Password }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                {{ if .validation.Password }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.Password }}</p>
+                {{ end }}
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Konfirmasi Password</label>
+                <input type="password" name="cpassword" class="w-full px-4 py-2 border {{ if .validation.Cpassword }} border-red-500 {{ else }} border-gray-300 {{ end }} rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                {{ if .validation.Cpassword }}
+                    <p class="text-red-500 text-sm mt-1">{{ .validation.Cpassword }}</p>
+                {{ end }}
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">SIGN UP</button>
+        </form>
+        
+        <hr class="my-4"/>
+        <p class="text-center text-gray-600">Sudah punya akun? <a href="/login" class="text-blue-500 hover:underline">Login</a></p>
+    </div>
+</body>
+</html>
